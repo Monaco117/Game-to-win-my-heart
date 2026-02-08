@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Score the Goal ⚽</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(#0a7d3b, #0f9d58);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .field {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    height: 350px;
+    background: #1fa35b;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+
+  .title {
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    margin-top: 15px;
+  }
+
+  .goal {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 80px;
+    border: 5px solid white;
+    border-bottom: none;
+  }
+
+  .ball {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    cursor: pointer;
+    transition: transform 0.8s ease-in;
+  }
+
+  .scored {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .scored h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+
+  .scored p {
+    font-size: 22px;
+  }
+
+  .heart {
+    position: fixed;
+    top: -10vh;
+    font-size: 24px;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="field">
+  <div class="title">Kick the ball ⚽</div>
+  <div class="goal"></div>
+  <div class="ball" id="ball">⚽</div>
+</div>
+
+<div class="scored" id="scored">
+  <h1>YAYYYY!!! 🎉</h1>
+  <p>You scored me 💘<br>I’m your Valentine 😌</p>
+</div>
+
+<script>
+  const ball = document.getElementById("ball");
+  const scored = document.getElementById("scored");
+
+  ball.addEventListener("click", () => {
+    ball.style.transform = "translate(-50%, -230px) scale(0.6)";
+
+    setTimeout(() => {
+      scored.style.display = "flex";
+      heartRain();
+    }, 800);
+  });
+
+  function heartRain() {
+    const interval = setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 30 + 20 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }, 120);
+
+    setTimeout(() => clearInterval(interval), 6000);
+  }
+</script>
+
+</body>
+</html>
